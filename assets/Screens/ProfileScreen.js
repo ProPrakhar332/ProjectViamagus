@@ -22,6 +22,11 @@ import down from '../Images/down.jpg';
 import win from '../Images/win.png';
 import loss from '../Images/loss.png';
 import list_logo from '../Images/list_logo.jpg';
+import monopoly from '../Images/monopoly.png';
+import surfer from '../Images/subway.png';
+import chess from '../Images/chess.png';
+import life from '../Images/life.png';
+import clash from '../Images/clash.png';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -51,8 +56,8 @@ const FirstRoute = () => (
           {/* Image */}
           <View style={{ flex: 0.3, justifyContent: 'center' }}>
             <Image
-              source={dataGames.result ? win : loss}
-              style={{ width: 60, height: 60, alignSelf: 'center' }}
+              source={dataGames.game}
+              style={{ width: 60, height: 60, alignSelf: 'center', borderRadius: 20 }}
             />
           </View>
           {/* Middle Text */}
@@ -200,6 +205,7 @@ const dataGames = [
     result: true,
     opponent: 'Eren Yeager',
     text: 'Top 10% of highest spending players in a month',
+    game: monopoly,
   },
   {
     key: 2,
@@ -207,6 +213,7 @@ const dataGames = [
     result: true,
     opponent: 'Armin Arlelt',
     text: 'Top 10% of highest spending players in a month',
+    game: surfer,
   },
   {
     key: 3,
@@ -214,6 +221,7 @@ const dataGames = [
     result: false,
     opponent: 'Conny Springer',
     text: 'Won 7 under-over games in a row',
+    game: clash,
   },
   {
     key: 4,
@@ -221,6 +229,7 @@ const dataGames = [
     result: false,
     opponent: 'Sasha Banks',
     text: 'Top 10% of highest spending players in a month',
+    game: chess,
   },
   {
     key: 5,
@@ -228,6 +237,7 @@ const dataGames = [
     result: true,
     opponent: 'Erwin Smith',
     text: 'Top 10% of highest spending players in a month',
+    game: life,
   },
 ];
 

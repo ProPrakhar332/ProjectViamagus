@@ -45,7 +45,7 @@ export default function HomeScreen() {
           style={{
             width: '100%',
             alignSelf: 'center',
-            backgroundColor: '#F3F2F7',
+            backgroundColor: '#FFF',
           }}
           showsVerticalScrollIndicator={false}
         >
@@ -54,7 +54,12 @@ export default function HomeScreen() {
             <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>Today's Game</Text>
           </View>
           {/* Card */}
-          <View style={{ width: '90%', alignSelf: 'center' }}>
+          <View
+            style={{
+              width: '90%',
+              alignSelf: 'center',
+            }}
+          >
             {/* Header */}
             <View
               style={{
@@ -64,6 +69,8 @@ export default function HomeScreen() {
                 backgroundColor: '#6231AD',
                 flexDirection: 'column',
                 zIndex: -1,
+                borderLeftWidth: 1,
+                borderRightWidth: 1,
               }}
             >
               <View
@@ -99,16 +106,18 @@ export default function HomeScreen() {
                     solid
                   />
                   <Text
-                    style={{ fontSize: 14, fontWeight: '500', color: '#D2BAF5', marginRight: 10 }}
+                    style={{ fontSize: 14, fontWeight: '500', color: 'white', marginRight: 10 }}
                   >
                     03:05:12
                   </Text>
                 </View>
               </View>
               <View style={{ marginTop: 25, marginBottom: 10, zIndex: 0, paddingBottom: 40 }}>
-                <Text style={{ color: '#D2BAF5', fontSize: 14 }}>Bitcoin price will be under</Text>
+                <Text style={{ color: '#D2BAF5', fontSize: 14, marginBottom: 4 }}>
+                  Bitcoin price will be under
+                </Text>
                 <Text style={{ color: '#D2BAF5' }}>
-                  <Text style={{ color: 'white', fontWeight: 'bold' }}>$24,524</Text> at 7 a ET on{' '}
+                  <Text style={{ color: 'white', fontWeight: 'bold' }}>$24,524 </Text> at 7 a ET on{' '}
                   <Text style={{ color: 'white', fontWeight: '400' }}>22nd Jan’21</Text>
                 </Text>
               </View>
@@ -126,7 +135,17 @@ export default function HomeScreen() {
             />
 
             {/* Bid */}
-            <View style={{ padding: 20, backgroundColor: 'white', zIndex: -1, top: -85 }}>
+            <View
+              style={{
+                padding: 20,
+                backgroundColor: 'white',
+                zIndex: -1,
+                top: -85,
+                borderLeftWidth: 1,
+                borderRightWidth: 1,
+                borderColor: 'gray',
+              }}
+            >
               <View
                 style={{
                   flexDirection: 'row',
@@ -219,7 +238,7 @@ export default function HomeScreen() {
                 padding: 20,
                 backgroundColor: '#EEEAF3',
                 zIndex: -1,
-                top: -85,
+                top: -95,
                 flexDirection: 'column',
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 1 },
@@ -228,6 +247,10 @@ export default function HomeScreen() {
                 elevation: 5,
                 borderBottomLeftRadius: 10,
                 borderBottomRightRadius: 10,
+                borderLeftWidth: 1,
+                borderRightWidth: 1,
+                borderBottomWidth: 1,
+                borderColor: 'gray',
               }}
             >
               {/* Buttons */}
@@ -479,7 +502,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2B8ADA',
   },
   bidHeading: { color: '#B5C0C8', fontSize: 12, fontWeight: '500', marginBottom: 4 },
-  bidSubHeading: { color: 'black', fontSize: 14, fontWeight: '500' },
+  bidSubHeading: { color: 'black', fontSize: 14, fontWeight: '500', textAlign: 'center' },
   modalView: {
     position: 'absolute',
     width: '100%',
