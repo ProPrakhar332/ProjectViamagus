@@ -1,253 +1,20 @@
-import * as React from 'react';
+import React from 'react';
 import {
   Text,
   View,
-  Image,
-  TouchableOpacity,
-  Pressable,
-  useWindowDimensions,
-  ScrollView,
-  StyleSheet,
+  Modal,
   KeyboardAvoidingView,
   SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
 } from 'react-native';
-import { TabBar, TabView, SceneMap } from 'react-native-tab-view';
-
-// icons or images
-import logo from '../Images/logo.jpg';
-import pfp from '../Images/pfp.jpg';
-import coin from '../Images/coin.jpg';
-import up from '../Images/up.jpg';
-import down from '../Images/down.jpg';
-import win from '../Images/win.png';
-import loss from '../Images/loss.png';
-import list_logo from '../Images/list_logo.jpg';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
-
-const FirstRoute = () => (
-  <View style={{ backgroundColor: 'green' }}>
-    <View
-      style={{
-        height: dataGames.length * 105,
-        backgroundColor: '#F6F3FA',
-        flexDirection: 'column',
-      }}
-    >
-      {dataGames.map((dataGames, index) => (
-        <View
-          key={index}
-          style={{
-            padding: 10,
-            backgroundColor: 'white',
-            marginTop: 15,
-            width: '95%',
-            alignSelf: 'center',
-            borderRadius: 10,
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-          }}
-        >
-          {/* Image */}
-          <View style={{ flex: 0.3, justifyContent: 'center' }}>
-            <Image
-              source={dataGames.result ? win : loss}
-              style={{ width: 60, height: 60, alignSelf: 'center' }}
-            />
-          </View>
-          {/* Middle Text */}
-          <View
-            style={{
-              flex: 0.5,
-              margin: 5,
-              justifyContent: 'space-between',
-            }}
-          >
-            {/* Heading */}
-            <View>
-              <Text style={{ fontWeight: '600', color: 'black', marginBottom: 5 }}>
-                {dataGames.title}
-              </Text>
-            </View>
-            {/* Description */}
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontWeight: '500', color: '#727682' }}>{dataGames.opponent}</Text>
-            </View>
-          </View>
-          {/* Right Text */}
-          <View
-            style={{
-              flex: 0.2,
-              margin: 5,
-              justifyContent: 'space-between',
-            }}
-          >
-            {/* Heading */}
-            <View>
-              <Text style={{ fontWeight: '600', color: 'black', marginBottom: 5 }}>Points</Text>
-            </View>
-            {/* Description */}
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontWeight: '500', color: !dataGames.result ? 'red' : 'green' }}>
-                {dataGames.result ? '+ 150' : '- 150'}
-              </Text>
-            </View>
-          </View>
-        </View>
-      ))}
-    </View>
-  </View>
-);
-
-const SecondRoute = () => (
-  <View
-    style={{
-      height: dataBadges.length * 105,
-      backgroundColor: '#F6F3FA',
-      flexDirection: 'column',
-      marginBottom: 20,
-    }}
-  >
-    {dataBadges.map((dataBadges, index) => (
-      <View
-        key={index}
-        style={{
-          padding: 10,
-          backgroundColor: 'white',
-          marginTop: 15,
-          width: '95%',
-          alignSelf: 'center',
-          borderRadius: 10,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}
-      >
-        {/* Image */}
-        <View style={{ flex: 0.2, justifyContent: 'center' }}>
-          <Image source={list_logo} style={{ width: 60, height: 60, alignSelf: 'center' }} />
-        </View>
-        {/* Text */}
-        <View
-          style={{
-            flex: 0.75,
-            margin: 5,
-            justifyContent: 'space-between',
-          }}
-        >
-          {/* Heading */}
-          <View>
-            <Text style={{ fontWeight: '600', color: 'black', marginBottom: 5 }}>
-              {dataBadges.title}
-            </Text>
-          </View>
-          {/* Description */}
-          <View>
-            <Text style={{ fontWeight: '500', color: '#727682' }}>{dataBadges.text}</Text>
-          </View>
-        </View>
-      </View>
-    ))}
-  </View>
-);
-
-const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
-});
-
-const dataBadges = [
-  {
-    key: 1,
-    title: 'First Stripe Earned',
-    text: 'Top 10% of highest spending players in a month',
-  },
-  {
-    key: 2,
-    title: 'Born Winner',
-    text: 'Top 10% of highest spending players in a month',
-  },
-  {
-    key: 3,
-    title: 'Trader of the Month',
-    text: 'Won 7 under-over games in a row',
-  },
-  {
-    key: 4,
-    title: 'Rising Star',
-    text: 'Top 10% of highest spending players in a month',
-  },
-  {
-    key: 5,
-    title: 'Jackpot',
-    text: 'Top 10% of highest spending players in a month',
-  },
-  {
-    key: 6,
-    title: 'Impossible',
-    text: 'Top 10% of highest spending players in a month',
-  },
-  {
-    key: 7,
-    title: 'First Stripe Earned',
-    text: 'Top 10% of highest spending players in a month',
-  },
-];
-
-const dataGames = [
-  {
-    key: 1,
-    title: 'Monopoly',
-    result: true,
-    opponent: 'Eren Yeager',
-    text: 'Top 10% of highest spending players in a month',
-  },
-  {
-    key: 2,
-    title: 'Subway Surfer',
-    result: true,
-    opponent: 'Armin Arlelt',
-    text: 'Top 10% of highest spending players in a month',
-  },
-  {
-    key: 3,
-    title: 'Clash of Clans',
-    result: false,
-    opponent: 'Conny Springer',
-    text: 'Won 7 under-over games in a row',
-  },
-  {
-    key: 4,
-    title: 'Chess',
-    result: false,
-    opponent: 'Sasha Banks',
-    text: 'Top 10% of highest spending players in a month',
-  },
-  {
-    key: 5,
-    title: 'The Game of Life',
-    result: true,
-    opponent: 'Erwin Smith',
-    text: 'Top 10% of highest spending players in a month',
-  },
-];
+import bitcoin from '../Images/bitcoin.png';
 
 export default function HomeScreen() {
-  const layout = useWindowDimensions();
-
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: 'first', title: 'Games Played' },
-    { key: 'second', title: 'Badges' },
-  ]);
-  const renderTabBar = (props) => (
-    <TabBar
-      {...props}
-      indicatorStyle={{ backgroundColor: '#6231AD' }}
-      style={{ backgroundColor: 'white', marginTop: 10 }}
-      labelStyle={{ color: '#727682', textTransform: 'none', fontWeight: '500' }}
-      activeColor="#6231AD"
-    />
-  );
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -269,173 +36,253 @@ export default function HomeScreen() {
           }}
           showsVerticalScrollIndicator={false}
         >
-          <View style={{ backgroundColor: '#F3F2F7', flex: 1 }}>
-            {/* Heading */}
+          {/* Heading */}
+          <View style={{ padding: 20 }}>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>Today's Game</Text>
+          </View>
+          {/* Card */}
+          <View style={{ width: '90%', alignSelf: 'center' }}>
+            {/* Header */}
             <View
               style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: 20,
-                paddingVertical: 40,
-                backgroundColor: 'white',
+                paddingTop: 20,
+                paddingHorizontal: 20,
+                borderRadius: 10,
+                backgroundColor: '#6231AD',
+                flexDirection: 'column',
+                zIndex: -1,
               }}
             >
-              <Image source={logo} width={20} height={20} />
-              <Text style={{ fontSize: 20, fontWeight: 'bold' }}> Profile </Text>
-              <Icon name="comment-alt" color={'#727682'} size={20} solid />
-            </View>
-
-            {/* Middle Part */}
-            <View
-              style={{
-                backgroundColor: 'white',
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              {/* Profile Image */}
-              <View style={{ flexDirection: 'column', flex: 1, align: 'center', paddingTop: 20 }}>
-                <Image
-                  source={pfp}
-                  style={{
-                    width: 100,
-                    height: 100,
-                    borderRadius: 100,
-                    alignSelf: 'center',
-                  }}
-                />
-                <TouchableOpacity
-                  style={{
-                    top: -30,
-                    padding: 8,
-                    borderRadius: 20,
-                    backgroundColor: 'white',
-                    alignSelf: 'center',
-                    right: -30,
-                    borderWidth: 1,
-                    borderColor: 'gray',
-                  }}
-                  activeOpacity={0.8}
-                >
-                  <Icon name="edit" color={'#727682'} size={15} style={{}} solid />
-                </TouchableOpacity>
-              </View>
-              {/* Profile Text */}
-              <View style={{ alignItems: 'center' }}>
-                {/* Profile Name */}
-                <View>
-                  <Text style={{ fontSize: 18, color: 'black' }}>Levi Quackerman</Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Text
+                    style={{ fontSize: 12, fontWeight: '500', color: '#D2BAF5', marginRight: 10 }}
+                  >
+                    UNDER OR OVER
+                  </Text>
+                  <Icon
+                    name="info-circle"
+                    size={14}
+                    color={'#D2BAF5'}
+                    style={{ alignSelf: 'center' }}
+                  />
                 </View>
-
-                {/* Points */}
-                <View style={{ paddingVertical: 5 }}>
-                  <Text style={{ fontSize: 14, color: '#727682' }}>6000 pts</Text>
-                </View>
-
-                {/* Profile Description */}
-                <View style={{ width: '85%' }}>
-                  <Text style={{ fontSize: 14, color: '#727682', textAlign: 'justify' }}>
-                    I’m a software developer that has been in the crypto space since 2012. And I’ve
-                    seen it grow and falter over a period of time. Really happy to be here!
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Text
+                    style={{ fontSize: 12, fontWeight: '400', color: '#D2BAF5', marginRight: 10 }}
+                  >
+                    Starting in
+                  </Text>
+                  <Icon
+                    name="clock"
+                    size={14}
+                    color={'#D2BAF5'}
+                    style={{ alignSelf: 'center', marginRight: 10 }}
+                    solid
+                  />
+                  <Text
+                    style={{ fontSize: 14, fontWeight: '500', color: '#D2BAF5', marginRight: 10 }}
+                  >
+                    03:05:12
                   </Text>
                 </View>
+              </View>
+              <View style={{ marginTop: 25, marginBottom: 10, zIndex: 0, paddingBottom: 40 }}>
+                <Text style={{ color: '#D2BAF5', fontSize: 14 }}>Bitcoin price will be under</Text>
+                <Text style={{ color: '#D2BAF5' }}>
+                  <Text style={{ color: 'white', fontWeight: 'bold' }}>$24,524</Text> at 7 a ET on{' '}
+                  <Text style={{ color: 'white', fontWeight: '400' }}>22nd Jan’21</Text>
+                </Text>
+              </View>
+            </View>
+            <Image
+              source={bitcoin}
+              style={{
+                width: 85 * 1.5,
+                height: 48 * 1.5,
+                zIndex: 2,
+                top: -85,
+                paddingBottom: 0,
+                alignSelf: 'flex-end',
+              }}
+            />
 
-                {/* Logout Button */}
-                <View>
+            {/* Bid */}
+            <View style={{ padding: 20, backgroundColor: 'white', zIndex: -1, top: -85 }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-evenly',
+                }}
+              >
+                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+                  <Text style={styles.bidHeading}>PRIZE POOL</Text>
+                  <Text style={styles.bidSubHeading}>$12,000</Text>
+                </View>
+                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+                  <Text style={styles.bidHeading}>UNDER</Text>
+                  <Text style={styles.bidSubHeading}>3.25x</Text>
+                </View>
+                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+                  <Text style={styles.bidHeading}>OVER</Text>
+                  <Text style={styles.bidSubHeading}>1.5x</Text>
+                </View>
+                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+                  <Text style={styles.bidHeading}>ENTRY FEES</Text>
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={[styles.bidSubHeading, { marginRight: 10 }]}>5</Text>
+                    <Icon name="coins" size={16} color={'#FFD600'} solid />
+                  </View>
+                </View>
+              </View>
+              <View style={{ marginVertical: 20 }}>
+                <Text style={[styles.bidHeading, { fontSize: 14, color: '#727682' }]}>
+                  What's your prediction?
+                </Text>
+                <View
+                  style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 10 }}
+                >
                   <TouchableOpacity
-                    style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 20 }}
-                    activeOpacity={0.8}
+                    style={{
+                      backgroundColor: '#452C55',
+                      flex: 0.45,
+                      flexDirection: 'row',
+                      borderRadius: 30,
+                      padding: 10,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                    activeOpacity={0.7}
                   >
                     <Icon
-                      name="sign-out-alt"
-                      color={'#727682'}
-                      size={15}
+                      name="arrow-up"
+                      size={16}
+                      color={'white'}
                       style={{ marginRight: 10 }}
                       solid
                     />
-                    <Text style={{ fontWeight: 'bold' }}>Logout</Text>
+                    <Text style={{ color: 'white', fontSize: 14, fontWeight: 'bold' }}>Under</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: '#6231AD',
+                      flex: 0.45,
+                      flexDirection: 'row',
+                      borderRadius: 30,
+                      padding: 10,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                    activeOpacity={0.7}
+                  >
+                    <Icon
+                      name="arrow-down"
+                      size={16}
+                      color={'white'}
+                      style={{ marginRight: 10 }}
+                      solid
+                    />
+                    <Text style={{ color: 'white', fontSize: 14, fontWeight: 'bold' }}>Over</Text>
                   </TouchableOpacity>
                 </View>
               </View>
             </View>
+            {/* Pool */}
+            <View
+              style={{
+                padding: 20,
+                backgroundColor: '#EEEAF3',
+                zIndex: -1,
+                top: -85,
+                flexDirection: 'column',
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 1 },
+                shadowOpacity: 0.8,
+                shadowRadius: 2,
+                elevation: 5,
+                borderBottomLeftRadius: 10,
+                borderBottomRightRadius: 10,
+              }}
+            >
+              {/* Buttons */}
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Icon name="user" size={16} color={'#727682'} style={{ marginRight: 15 }} solid />
+                  <Text style={{ color: '#727682', fontSize: 14, fontWeight: 'bold' }}>
+                    355 Players
+                  </Text>
+                </View>
 
-            {/* Stats Box*/}
-            <View style={{ alignItems: 'center', backgroundColor: 'white' }}>
-              {/* Coin image */}
-              <View>
-                <Image source={coin} width={30} height={30} style={{ zIndex: 2 }} />
+                <TouchableOpacity
+                  style={{ flexDirection: 'row', alignItems: 'center' }}
+                  activeOpacity={0.7}
+                >
+                  <Icon
+                    name="chart-bar"
+                    size={16}
+                    color={'#727682'}
+                    style={{ marginRight: 15 }}
+                    solid
+                  />
+                  <Text style={{ color: '#727682', fontSize: 14, fontWeight: 'bold' }}>
+                    View Chart
+                  </Text>
+                </TouchableOpacity>
               </View>
-              {/* Stats */}
+              {/* Poll Bar */}
               <View
                 style={{
-                  zIndex: 1,
-                  top: -15,
-                  flexDirection: 'row',
-                  width: '95%',
-                  borderRadius: 10,
-                  borderWidth: 0.5,
-                  borderColor: 'gray',
+                  marginVertical: 15,
                   alignItems: 'center',
-                  justifyContent: 'space-evenly',
-                  padding: 10,
+                  flexDirection: 'row',
                 }}
               >
-                {/* Text 1 */}
                 <View
                   style={{
-                    flex: 0.45,
-                    flexDirection: 'column',
-                    alignContent: 'center',
-                    alignItems: 'flex-start',
+                    width: '66%',
+                    height: 15,
+                    borderBottomLeftRadius: 10,
+                    borderTopLeftRadius: 10,
+                    backgroundColor: '#FE4190',
                   }}
-                >
-                  <View style={{ padding: 10 }}>
-                    <Text style={{ fontWeight: '600', fontSize: 14, color: '#727682' }}>
-                      Under or Over
-                    </Text>
-                  </View>
-                  <View style={{ flexDirection: 'row', padding: 10, alignItems: 'center' }}>
-                    <Image source={up} width={20} height={20} style={{ marginRight: 15 }} />
-                    <Text style={{ fontWeight: '600', fontSize: 24, color: 'black' }}>81%</Text>
-                  </View>
+                ></View>
+                <View
+                  style={{
+                    width: '34%',
+                    height: 15,
+                    borderBottomRightRadius: 10,
+                    borderTopRightRadius: 10,
+                    backgroundColor: '#2DABAD',
+                  }}
+                ></View>
+              </View>
+              {/* Chart Lablel */}
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  width: '95%',
+                  alignSelf: 'center',
+                }}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Text style={{ color: '#727682', fontSize: 12, fontWeight: '400' }}>
+                    232 predicted under
+                  </Text>
                 </View>
-                {/* Text 2 */}
-                <View
-                  style={{
-                    flex: 0.45,
-                    flexDirection: 'column',
-                    alignContent: 'center',
-                    alignItems: 'flex-start',
-                  }}
-                >
-                  <View style={{ padding: 10 }}>
-                    <Text style={{ fontWeight: '600', fontSize: 14, color: '#727682' }}>Top 5</Text>
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      padding: 10,
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Image source={down} width={20} height={20} style={{ marginRight: 15 }} />
-                    <Text style={{ fontWeight: '600', fontSize: 24, color: 'black' }}>-51%</Text>
-                  </View>
+
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Text style={{ color: '#727682', fontSize: 12, fontWeight: '400' }}>
+                    123 predicted over
+                  </Text>
                 </View>
               </View>
             </View>
-
-            {/* Tab View */}
-            <TabView
-              renderTabBar={renderTabBar}
-              navigationState={{ index, routes }}
-              renderScene={renderScene}
-              onIndexChange={setIndex}
-              initialLayout={{ width: layout.width }}
-              style={{ height: index == 1 ? 120 * dataBadges.length : 110 * dataGames.length }}
-            />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -451,4 +298,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#2B8ADA',
   },
+  bidHeading: { color: '#B5C0C8', fontSize: 12, fontWeight: '500', marginBottom: 4 },
+  bidSubHeading: { color: 'black', fontSize: 14, fontWeight: '500' },
 });
