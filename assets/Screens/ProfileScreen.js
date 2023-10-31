@@ -13,12 +13,140 @@ import {
 } from 'react-native';
 import { TabBar, TabView, SceneMap } from 'react-native-tab-view';
 
-const FirstRoute = () => <View style={{ height: 200, backgroundColor: '#F6F3FA' }}></View>;
+// icons or images
+import logo from '../Images/logo.jpg';
+import pfp from '../Images/pfp.jpg';
+import coin from '../Images/coin.jpg';
+import up from '../Images/up.jpg';
+import down from '../Images/down.jpg';
+import win from '../Images/win.png';
+import loss from '../Images/loss.png';
+import list_logo from '../Images/list_logo.jpg';
+
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
+const FirstRoute = () => (
+  <View style={{ backgroundColor: 'green' }}>
+    <View
+      style={{
+        height: dataGames.length * 105,
+        backgroundColor: '#F6F3FA',
+        flexDirection: 'column',
+      }}
+    >
+      {dataGames.map((dataGames, index) => (
+        <View
+          key={index}
+          style={{
+            padding: 10,
+            backgroundColor: 'white',
+            marginTop: 15,
+            width: '95%',
+            alignSelf: 'center',
+            borderRadius: 10,
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+          }}
+        >
+          {/* Image */}
+          <View style={{ flex: 0.3, justifyContent: 'center' }}>
+            <Image
+              source={dataGames.result ? win : loss}
+              style={{ width: 60, height: 60, alignSelf: 'center' }}
+            />
+          </View>
+          {/* Middle Text */}
+          <View
+            style={{
+              flex: 0.5,
+              margin: 5,
+              justifyContent: 'space-between',
+            }}
+          >
+            {/* Heading */}
+            <View>
+              <Text style={{ fontWeight: '600', color: 'black', marginBottom: 5 }}>
+                {dataGames.title}
+              </Text>
+            </View>
+            {/* Description */}
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={{ fontWeight: '500', color: '#727682' }}>{dataGames.opponent}</Text>
+            </View>
+          </View>
+          {/* Right Text */}
+          <View
+            style={{
+              flex: 0.2,
+              margin: 5,
+              justifyContent: 'space-between',
+            }}
+          >
+            {/* Heading */}
+            <View>
+              <Text style={{ fontWeight: '600', color: 'black', marginBottom: 5 }}>Points</Text>
+            </View>
+            {/* Description */}
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={{ fontWeight: '500', color: !dataGames.result ? 'red' : 'green' }}>
+                {dataGames.result ? '+ 150' : '- 150'}
+              </Text>
+            </View>
+          </View>
+        </View>
+      ))}
+    </View>
+  </View>
+);
 
 const SecondRoute = () => (
-  <View style={{ height: 200, backgroundColor: '#F6F3FA' }}>
-    <Text style={{ color: 'black' }}>This is secong screen</Text>
-    <Text>There are a ot of text here</Text>
+  <View
+    style={{
+      height: dataBadges.length * 105,
+      backgroundColor: '#F6F3FA',
+      flexDirection: 'column',
+      marginBottom: 20,
+    }}
+  >
+    {dataBadges.map((dataBadges, index) => (
+      <View
+        key={index}
+        style={{
+          padding: 10,
+          backgroundColor: 'white',
+          marginTop: 15,
+          width: '95%',
+          alignSelf: 'center',
+          borderRadius: 10,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}
+      >
+        {/* Image */}
+        <View style={{ flex: 0.2, justifyContent: 'center' }}>
+          <Image source={list_logo} style={{ width: 60, height: 60, alignSelf: 'center' }} />
+        </View>
+        {/* Text */}
+        <View
+          style={{
+            flex: 0.75,
+            margin: 5,
+            justifyContent: 'space-between',
+          }}
+        >
+          {/* Heading */}
+          <View>
+            <Text style={{ fontWeight: '600', color: 'black', marginBottom: 5 }}>
+              {dataBadges.title}
+            </Text>
+          </View>
+          {/* Description */}
+          <View>
+            <Text style={{ fontWeight: '500', color: '#727682' }}>{dataBadges.text}</Text>
+          </View>
+        </View>
+      </View>
+    ))}
   </View>
 );
 
@@ -27,15 +155,81 @@ const renderScene = SceneMap({
   second: SecondRoute,
 });
 
-// icons or images
-import logo from '../Images/logo.jpg';
-import pfp from '../Images/pfp.jpg';
-import coin from '../Images/coin.jpg';
-import up from '../Images/up.jpg';
-import down from '../Images/down.jpg';
-import list_logo from '../Images/list_logo.jpg';
+const dataBadges = [
+  {
+    key: 1,
+    title: 'First Stripe Earned',
+    text: 'Top 10% of highest spending players in a month',
+  },
+  {
+    key: 2,
+    title: 'Born Winner',
+    text: 'Top 10% of highest spending players in a month',
+  },
+  {
+    key: 3,
+    title: 'Trader of the Month',
+    text: 'Won 7 under-over games in a row',
+  },
+  {
+    key: 4,
+    title: 'Rising Star',
+    text: 'Top 10% of highest spending players in a month',
+  },
+  {
+    key: 5,
+    title: 'Jackpot',
+    text: 'Top 10% of highest spending players in a month',
+  },
+  {
+    key: 6,
+    title: 'Impossible',
+    text: 'Top 10% of highest spending players in a month',
+  },
+  {
+    key: 7,
+    title: 'First Stripe Earned',
+    text: 'Top 10% of highest spending players in a month',
+  },
+];
 
-import Icon from 'react-native-vector-icons/FontAwesome5';
+const dataGames = [
+  {
+    key: 1,
+    title: 'Monopoly',
+    result: true,
+    opponent: 'Eren Yeager',
+    text: 'Top 10% of highest spending players in a month',
+  },
+  {
+    key: 2,
+    title: 'Subway Surfer',
+    result: true,
+    opponent: 'Armin Arlelt',
+    text: 'Top 10% of highest spending players in a month',
+  },
+  {
+    key: 3,
+    title: 'Clash of Clans',
+    result: false,
+    opponent: 'Conny Springer',
+    text: 'Won 7 under-over games in a row',
+  },
+  {
+    key: 4,
+    title: 'Chess',
+    result: false,
+    opponent: 'Sasha Banks',
+    text: 'Top 10% of highest spending players in a month',
+  },
+  {
+    key: 5,
+    title: 'The Game of Life',
+    result: true,
+    opponent: 'Erwin Smith',
+    text: 'Top 10% of highest spending players in a month',
+  },
+];
 
 export default function ProfileScreen() {
   const layout = useWindowDimensions();
@@ -83,21 +277,34 @@ export default function ProfileScreen() {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: 20,
+                paddingVertical: 40,
                 backgroundColor: 'white',
               }}
             >
               <Image source={logo} width={20} height={20} />
-              <Text> Profile </Text>
+              <Text style={{ fontSize: 20, fontWeight: 'bold' }}> Profile </Text>
               <Icon name="comment-alt" color={'#727682'} size={20} solid />
             </View>
 
             {/* Middle Part */}
-            <View style={{ paddingVertical: 20, backgroundColor: 'white' }}>
+            <View
+              style={{
+                backgroundColor: 'white',
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
               {/* Profile Image */}
-              <View style={{ alignItems: 'center' }}>
+              <View style={{ flexDirection: 'column', flex: 1, align: 'center', paddingTop: 20 }}>
                 <Image
                   source={pfp}
-                  style={{ width: 100, height: 100, borderRadius: 100, alignSelf: 'center' }}
+                  style={{
+                    width: 100,
+                    height: 100,
+                    borderRadius: 100,
+                    alignSelf: 'center',
+                  }}
                 />
                 <TouchableOpacity
                   style={{
@@ -119,17 +326,17 @@ export default function ProfileScreen() {
               <View style={{ alignItems: 'center' }}>
                 {/* Profile Name */}
                 <View>
-                  <Text>Levi Quackerman</Text>
+                  <Text style={{ fontSize: 18, color: 'black' }}>Levi Quackerman</Text>
                 </View>
 
                 {/* Points */}
-                <View>
-                  <Text>6000 pts</Text>
+                <View style={{ paddingVertical: 5 }}>
+                  <Text style={{ fontSize: 14, color: '#727682' }}>6000 pts</Text>
                 </View>
 
                 {/* Profile Description */}
                 <View style={{ width: '85%' }}>
-                  <Text>
+                  <Text style={{ fontSize: 14, color: '#727682', textAlign: 'justify' }}>
                     I’m a software developer that has been in the crypto space since 2012. And I’ve
                     seen it grow and falter over a period of time. Really happy to be here!
                   </Text>
@@ -138,7 +345,7 @@ export default function ProfileScreen() {
                 {/* Logout Button */}
                 <View>
                   <TouchableOpacity
-                    style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10 }}
+                    style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 20 }}
                     activeOpacity={0.8}
                   >
                     <Icon
@@ -168,10 +375,11 @@ export default function ProfileScreen() {
                   flexDirection: 'row',
                   width: '95%',
                   borderRadius: 10,
-                  borderWidth: 1,
+                  borderWidth: 0.5,
                   borderColor: 'gray',
                   alignItems: 'center',
                   justifyContent: 'space-evenly',
+                  padding: 10,
                 }}
               >
                 {/* Text 1 */}
@@ -184,11 +392,13 @@ export default function ProfileScreen() {
                   }}
                 >
                   <View style={{ padding: 10 }}>
-                    <Text>Under or Over</Text>
+                    <Text style={{ fontWeight: '600', fontSize: 14, color: '#727682' }}>
+                      Under or Over
+                    </Text>
                   </View>
                   <View style={{ flexDirection: 'row', padding: 10, alignItems: 'center' }}>
-                    <Image source={up} width={20} height={20} style={{ marginRight: 10 }} />
-                    <Text>81%</Text>
+                    <Image source={up} width={20} height={20} style={{ marginRight: 15 }} />
+                    <Text style={{ fontWeight: '600', fontSize: 24, color: 'black' }}>81%</Text>
                   </View>
                 </View>
                 {/* Text 2 */}
@@ -201,7 +411,7 @@ export default function ProfileScreen() {
                   }}
                 >
                   <View style={{ padding: 10 }}>
-                    <Text>Top 5</Text>
+                    <Text style={{ fontWeight: '600', fontSize: 14, color: '#727682' }}>Top 5</Text>
                   </View>
                   <View
                     style={{
@@ -210,8 +420,8 @@ export default function ProfileScreen() {
                       alignItems: 'center',
                     }}
                   >
-                    <Image source={down} width={20} height={20} style={{ marginRight: 10 }} />
-                    <Text>-51%</Text>
+                    <Image source={down} width={20} height={20} style={{ marginRight: 15 }} />
+                    <Text style={{ fontWeight: '600', fontSize: 24, color: 'black' }}>-51%</Text>
                   </View>
                 </View>
               </View>
@@ -224,7 +434,7 @@ export default function ProfileScreen() {
               renderScene={renderScene}
               onIndexChange={setIndex}
               initialLayout={{ width: layout.width }}
-              style={{ height: 400 }}
+              style={{ height: index == 1 ? 120 * dataBadges.length : 110 * dataGames.length }}
             />
           </View>
         </ScrollView>
