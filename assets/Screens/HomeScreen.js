@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Text,
   View,
@@ -9,12 +9,25 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  Pressable,
 } from 'react-native';
 
+import ScrollPicker from 'react-native-wheel-scrollview-picker';
+
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import FAIcon from 'react-native-vector-icons/FontAwesome';
 import bitcoin from '../Images/bitcoin.png';
 
+const dataSource = ['10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
+
 export default function HomeScreen() {
+  const [showModal, setshowModal] = useState(false);
+  const [isUnder, setisUnder] = useState(false);
+  const ref = useRef();
+  const [index, setIndex] = useState(0);
+  const onValueChange = (data, selectedIndex) => {
+    setIndex(selectedIndex);
+  };
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -158,9 +171,13 @@ export default function HomeScreen() {
                       justifyContent: 'center',
                     }}
                     activeOpacity={0.7}
+                    onPress={() => {
+                      setisUnder(true);
+                      setshowModal(true);
+                    }}
                   >
                     <Icon
-                      name="arrow-up"
+                      name="arrow-down"
                       size={16}
                       color={'white'}
                       style={{ marginRight: 10 }}
@@ -179,9 +196,13 @@ export default function HomeScreen() {
                       justifyContent: 'center',
                     }}
                     activeOpacity={0.7}
+                    onPress={() => {
+                      setisUnder(false);
+                      setshowModal(true);
+                    }}
                   >
                     <Icon
-                      name="arrow-down"
+                      name="arrow-up"
                       size={16}
                       color={'white'}
                       style={{ marginRight: 10 }}
@@ -285,6 +306,165 @@ export default function HomeScreen() {
             </View>
           </View>
         </ScrollView>
+        {showModal ? (
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={showModal}
+            onRequestClose={() => {
+              setshowModal(false);
+            }}
+          >
+            <View
+              style={{
+                height: '100%',
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                flexDirection: 'row',
+                justifyContent: 'center',
+              }}
+              //onPress={() => setshowModal(false)}
+            >
+              <View style={[styles.modalView, { flexDirection: 'column' }]}>
+                <View
+                  style={{
+                    width: '100%',
+                    alignSelf: 'center',
+                  }}
+                >
+                  <FAIcon
+                    name="close"
+                    color="black"
+                    size={26}
+                    style={{ position: 'absolute', top: 0, right: 0 }}
+                    onPress={() => {
+                      setshowModal(false);
+                    }}
+                  />
+                </View>
+                <View style={{ alignSelf: 'flex-start' }}>
+                  <Text
+                    style={{ color: 'black', fontSize: 16, fontWeight: 'bold', textAlign: 'left' }}
+                  >
+                    Your Prediction is {isUnder ? 'Under' : 'Over'}
+                  </Text>
+                </View>
+                <View style={{ alignSelf: 'flex-start', marginTop: 20 }}>
+                  <Text
+                    style={{
+                      color: '#727682',
+                      fontSize: 12,
+                      fontWeight: 'bold',
+                      textAlign: 'left',
+                    }}
+                  >
+                    ENTRY TICKETS
+                  </Text>
+                </View>
+                <View style={{ alignSelf: 'center', backgroundColor: 'green', width: '100%' }}>
+                  <ScrollPicker
+                    ref={ref}
+                    dataSource={dataSource}
+                    selectedIndex={index}
+                    wrapperHeight={200}
+                    onValueChange={onValueChange}
+                    highlightBorderWidth={0}
+                    wrapperBackground="white"
+                    activeItemTextStyle={{
+                      fontSize: 24,
+                      color: 'black',
+                      fontWeight: 'bold',
+                    }}
+                    itemTextStyle={{
+                      fontSize: 16,
+                      color: '#333333',
+                    }}
+                  />
+                </View>
+                <View
+                  style={{
+                    width: '100%',
+                    backgroundColor: '#6231AD',
+                    height: 30,
+                    opacity: 0.5,
+                    top: -115,
+                    borderRadius: 5,
+                  }}
+                ></View>
+
+                <View style={{ alignSelf: 'flex-start' }}>
+                  <View style={{}}>
+                    <Text style={{ color: '#B5C0C8', fontSize: 14, fontWeight: '500' }}>
+                      You can win
+                    </Text>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        width: '90%',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <View style={{ flex: 0.5, flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={{ color: '#03A67F', fontWeight: 'bold', fontSize: 14 }}>
+                          $2000
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          flex: 0.5,
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Text
+                          style={{
+                            color: '#727682',
+                            fontSize: 12,
+                            fontWeight: 'bold',
+                            marginRight: 5,
+                          }}
+                        >
+                          Total
+                        </Text>
+                        <Icon name="coins" size={16} color={'#FFD600'} solid />
+                        <Text
+                          style={{
+                            color: 'black',
+                            fontSize: 16,
+                            fontWeight: 'bold',
+                            marginLeft: 5,
+                          }}
+                        >
+                          5
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+
+                {/* Submit Button */}
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: '#6231AD',
+                    width: '80%',
+                    alignSelf: 'center',
+                    alignItems: 'center',
+                    padding: 10,
+                    marginVertical: 30,
+                    marginBottom: 50,
+                    borderRadius: 20,
+                  }}
+                  activeOpacity={0.7}
+                  onPress={() => setshowModal(false)}
+                >
+                  <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>
+                    Submit my prediction
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+        ) : null}
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
@@ -300,4 +480,20 @@ const styles = StyleSheet.create({
   },
   bidHeading: { color: '#B5C0C8', fontSize: 12, fontWeight: '500', marginBottom: 4 },
   bidSubHeading: { color: 'black', fontSize: 14, fontWeight: '500' },
+  modalView: {
+    position: 'absolute',
+    width: '100%',
+    maxHeight: 450,
+    bottom: 0,
+    backgroundColor: 'white',
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    padding: 15,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+  },
 });
