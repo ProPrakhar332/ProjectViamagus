@@ -23,7 +23,7 @@ import win from '../Images/win.png';
 import loss from '../Images/loss.png';
 import list_logo from '../Images/list_logo.jpg';
 import monopoly from '../Images/monopoly.png';
-import surfer from '../Images/subway.png';
+import surfer from '../Images/subway.jpg';
 import chess from '../Images/chess.png';
 import life from '../Images/life.png';
 import clash from '../Images/clash.png';
